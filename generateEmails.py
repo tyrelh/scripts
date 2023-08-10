@@ -40,9 +40,11 @@ def main():
     outputFile.write('"contacts": [' + "\n")
 
     for n in range(0, args.amount):
-        outputFile.write(f'  {{ "email": "{args.email}+{str(n)}@{args.domain}" }},' + "\n")
+        outputFile.write(f'  {{ "email": "{args.email}+{str(n)}@{args.domain}" }},')
+        if args.newline:
+            outputFile.write("\n")
     
-    outputFile.write(']' + "\n")
+    outputFile.write("\n" + ']' + "\n")
     
     print(filename + " generated.")
 
