@@ -16,6 +16,12 @@ def validateArgs():
         action="store_true",
         help='Delimiter you want between quoted line items. For example "\n"'
     )
+    parser.add_argument(
+        "--noquotes",
+        required=False,
+        action="store_true",
+        help='should values not be quoted'
+    )
     global args
     args = parser.parse_args()
 
@@ -40,7 +46,11 @@ def main():
             print("separating results on new lines")
         output = ""
         for inputline in inputlines:
-            output += f"\"{inputline.strip()}\","
+            if not args.noquotes:
+                output += "\""
+            output += f"{inputline.strip()},"
+            if not args.noquotes:
+                output += "\""
             if args.newline:
                 output += "\n"
         
